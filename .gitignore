@@ -1,0 +1,7 @@
+#gitignore
+
+#no.o files
+*.o
+#no.a files
+*.a
+
