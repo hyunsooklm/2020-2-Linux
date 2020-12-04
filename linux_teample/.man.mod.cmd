@@ -1,0 +1,1 @@
+cmd_/home/hyunsooklm/Linux_2/2020-2-Linux/atomic/git_linux/2020-2-Linux/linux_teample/man.mod := { echo  /home/hyunsooklm/Linux_2/2020-2-Linux/atomic/git_linux/2020-2-Linux/linux_teample/man.o; echo; } > /home/hyunsooklm/Linux_2/2020-2-Linux/atomic/git_linux/2020-2-Linux/linux_teample/man.mod

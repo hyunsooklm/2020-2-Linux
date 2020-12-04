@@ -52,26 +52,44 @@ void struct_example(void)
 		struct my_node *new=Get_Node(&garbage);
 		new->data=i;
 		list_add(&new->list,&my_list);
-	} //insert 100000
+	} //insert 1,000,000  	1
 
 	struct my_node *cur;
 	struct my_node *tmp;
 	list_for_each_entry_safe(cur,tmp,&my_list,list){
 		list_del(&cur->list);
 		Return_Node(&cur->list,&garbage);
-	} //delete all
+	} //delete all		1
 	for(i=0;i<iter_num;i++){
 		struct my_node* new=Get_Node(&garbage);
 		new->data=i;
 		list_add(&new->list,&my_list);
-	}//reinsert 10000
+	}//reinsert 1,000,000  		2
 	list_for_each_entry_safe(cur,tmp,&my_list,list){
 		list_del(&cur->list);
 		Return_Node(&cur->list,&garbage);
+	}//redelete 1,000,000		2
+	for(i=0;i<iter_num;i++){
+		struct my_node* new=Get_Node(&garbage);
+		new->data=i;
+		list_add(&new->list,&my_list);
+	}//insert 1,000,000		3*/
+	list_for_each_entry_safe(cur,tmp,&my_list,list){
+		list_del(&cur->list);
+		Return_Node(&cur->list,&garbage);	//3
 	}
+	for(i=0;i<iter_num;i++){
+		struct my_node* new=Get_Node(&garbage);
+		new->data=i;
+		list_add(&new->list,&my_list);
+	}//insert 1,000,000	4
+	list_for_each_entry_safe(cur,tmp,&my_list,list){
+		list_del(&cur->list);
+		kfree(cur);
+	}//delete 4 all
 	last=curr_get_timestamp();
-	printk("insert-delete-insert time(getnode):%ldus",last-start);
-
+	printk("using (getnode) 4 times :%ld ns",last-start);
+	
 	/*list_for_each_entry_safe(cur,tmp,&my_list,list){
 		if(cur->data==12232){
 		printk("delete-cur-value:%d\n",cur->data);
@@ -81,15 +99,8 @@ void struct_example(void)
 	}
 	}
 	last=curr_get_timestamp();*/
-	//printk("IN 100000's list. delete time:%ldus",last-start);*/
+	//printk("IN 100000's list. delete time:%ld ns",last-start);*/
 }
-/*static inline s64 curr_get_timestamp(void)
-{
-	struct timespec ts;
-	getnstimeofday(&ts);
-	return timespec_to_ns(&ts);
-}
-*/
 static int __init hello_init(void)
 {
 	printk(KERN_NOTICE "init!\n");

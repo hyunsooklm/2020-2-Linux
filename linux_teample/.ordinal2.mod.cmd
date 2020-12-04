@@ -1,0 +1,1 @@
+cmd_/home/hyunsooklm/Linux_2/2020-2-Linux/atomic/git_linux/2020-2-Linux/linux_teample/ordinal2.mod := { echo  /home/hyunsooklm/Linux_2/2020-2-Linux/atomic/git_linux/2020-2-Linux/linux_teample/ordinal2.o; echo; } > /home/hyunsooklm/Linux_2/2020-2-Linux/atomic/git_linux/2020-2-Linux/linux_teample/ordinal2.mod

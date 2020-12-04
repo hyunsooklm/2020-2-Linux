@@ -52,26 +52,44 @@ void struct_example(void)
 		struct my_node *new=kmalloc(sizeof(struct my_node),GFP_KERNEL);
 		new->data=i;
 		list_add(&new->list,&my_list);
-	} //insert 1000000
+	} //insert 1,000,000  	1
 
 	struct my_node *cur;
 	struct my_node *tmp;
 	list_for_each_entry_safe(cur,tmp,&my_list,list){
 		list_del(&cur->list);
 		kfree(cur);
-	} //delete all
+	} //delete all		1
 	for(i=0;i<iter_num;i++){
 		struct my_node* new=kmalloc(sizeof(struct my_node),GFP_KERNEL);
 		new->data=i;
 		list_add(&new->list,&my_list);
-	}//reinsert 1000000
+	}//reinsert 1,000,000  		2
 	list_for_each_entry_safe(cur,tmp,&my_list,list){
 		list_del(&cur->list);
 		kfree(cur);
-	}//re_delete all
+	}//redelete 1,000,000		2
+	for(i=0;i<iter_num;i++){
+		struct my_node* new=kmalloc(sizeof(struct my_node),GFP_KERNEL);
+		new->data=i;
+		list_add(&new->list,&my_list);
+	}//insert 1,000,000		3*/
+	list_for_each_entry_safe(cur,tmp,&my_list,list){
+		list_del(&cur->list);
+		kfree(cur);	//	3
+	}
+	for(i=0;i<iter_num;i++){
+		struct my_node* new=kmalloc(sizeof(struct my_node),GFP_KERNEL);
+		new->data=i;
+		list_add(&new->list,&my_list);
+	}//reinsert 1,000,000	4
+	list_for_each_entry_safe(cur,tmp,&my_list,list){
+		list_del(&cur->list);
+		kfree(cur);
+	}
 	last=curr_get_timestamp();
-	printk("(ordinal)insert-delete-insert time:%ldus",last-start);
-		
+	printk("using (kmalloc&kfree)4 times :%ldns",last-start);
+	
 	/*list_for_each_entry_safe(cur,tmp,&my_list,list){
 		if(cur->data==12232){
 		printk("delete-cur-value:%d\n",cur->data);
